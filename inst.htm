@@ -1,0 +1,406 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head>
+<meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<meta name="description" content="description">
+<meta name="keywords" content="keywords">
+<meta name="author" content="toupliti">
+<title></title>
+<link rel="stylesheet" type="text/css" href="index_data/style.css">
+<style>
+  .zone-code {
+    
+    background-color: transparent; 
+    color: #000000; /* Texte clair pour le contraste */
+    
+    /* Police style monospace (comme un terminal) */
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 17px;
+    
+    /* Gestion de la taille et du dÃ©filement */
+    max-height: 400px; /* Hauteur maximale avant dÃ©filement */
+    overflow-y: auto;  /* Ajoute une barre de dÃ©filement verticale si nÃ©cessaire */
+    overflow-x: auto;  /* Ajoute une barre horizontale si la ligne est trop longue */
+    
+    /* EsthÃ©tique */
+    padding: 15px;
+    border-radius: 0px;
+    border: 0px solid #444;
+    
+    /* Pour que le texte ne dÃ©passe pas horizontalement sans casser */
+    white-space: pre-wrap; 
+  }
+
+  /* Personnalisation de la barre de dÃ©filement (optionnel, pour Chrome/Safari/Edge) */
+  .zone-code::-webkit-scrollbar {
+    width: 10px;
+  }
+  .zone-code::-webkit-scrollbar-track {
+    background: #AAAAAA;
+  }
+  .zone-code::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 5px;
+  }
+  .zone-code::-webkit-scrollbar-thumb:hover {
+    background: #777;
+  }
+</style>
+<link rel="icon" type="image/png" href="index_data/favicon.png">
+</head>
+
+<body>
+
+<div id="head">
+<h1>Toupliti</h1>
+</div>
+
+<div id="menutop">
+Menu
+</div>
+
+<div id="menu">
+<a href="./index.htm" title="">toupliti's</a>
+<a href="./projet.htm" title="">projet</a>
+<a href="./doc.htm" title="">docs</a>
+<a href="./toupliti.htm" title="">a propos</a>
+</div>
+
+<div id="extratop">
+nouveauté
+</div>
+
+<div id="extra">
+wait
+</div>
+
+<div id="contenttop">
+<a href="./projet1.htm"><img src="index_data/return.png" alt="" id="return"></a>  Toupliti/projet/projet1/inst.txt
+</div>
+
+<div id="content" class="zone-code">
+instruction for toupliti computer V1.4
+
+M1 sera toujours l'instruction
+M2 sera toujours la source ou la 1 er valeur aretmetique
+M3 sera toujour le selectioné ou la destination. est aussi le 2eme valeur aretmetique
+REG1 sera toujour la valeur de comparaison ou le resulat dune operation aretmetique
+LE BINAIRE DE DROITE A GAUCHE
+
+il y a 3 posibilité de code - --4plus tard
+0 = language machine (apres la traduction de la ligne 4 de chaque instruction )
+1 = asembly (presque comme le language machine mais en texte)
+2 = simplifié (est baucoup simplifié et doit etre compilé pour que la machine puise l'utiliser)
+
+3 = (futur projet) lua ??
+
+au compilateur de 2. reg peut s'ecrire r comme "r1" a la place de "reg1"
+
+CHANGEMENT POUR LA V1.3 ??
+LES REG SONT AUTO SELECTIONER POUR LA PLUPARD DES FONCTION !!!!!
+
+CHANGEMENT POUR LA V1.4 ??
+reécritre de toutes les description et mise en place de V1.4 . la v1.3 pour l'aretmetique/logiqe est faux (anulé)
+
+SI COMPILé: une variable contient du text. il est traduit en id puis est donné l'adresse ram apres la compilation. si çe n'ai pas du text alors il sera considerer par un registre ou un nombre
+La compilation selectione la bonne operation corespondat 
+
+La liste des instruction a été faite sans ia
+
+1 = C
+-- V1
+-- charge
+-- charge une valeur dans la ram depuis la rom M2=DATA M3=adrs
+-- "C {number} {RALADRS or RAMNAME}"
+-- compilation si vrais
+-- "{variable} = {nombres}"
+
+
+2 = FC
+-- V1.4
+-- fast charge
+-- charge un registre par une donné rom
+-- "FC {number} {reg}"
+-- compilation si vrais
+-- "reg{} = {nombres}
+
+
+3 = TC
+-- V1
+-- travail charge
+-- charge un reg avec une valeur ram pour le travail M2=RAM
+-- "TC {RAMADRS or RAMNAME} {reg}"
+-- compilation si vrais
+-- "reg{} = {variable}"
+
+
+4 = TS
+-- V1
+-- travail save
+-- Stocke une valeur de reg dans la ram apres le travail
+-- "TS {reg} {RAMADRS or RAMNAME}
+-- compilation si vrais
+-- "{variable} = reg{}"
+
+
+5 = mov
+-- V1.3
+-- move (deplace)
+-- deplace un reg a un autre
+-- "MOV {regS} {regD}"
+-- compilation si vrais
+-- "reg{} = reg{}"
+
+
+6 = ift
+-- v1.4
+-- jump if true
+-- met pc a M2--1 si M3--2 est true ou 1 (=01) M =Reg sel
+-- "IFT {reg--1} {reg--2}"
+-- compilation si vrais
+-- "if {reg--2} = true then jumpt {reg--1}"
+
+
+7 = iff
+-- v1.4
+-- jump if true
+-- met pc a M2--1 si M3--2 est false ou 0 (=00) M =Reg sel
+-- "IFF {reg--1} {reg--2}"
+-- compilation si vrais
+-- "if {reg--2} = false then jumpt {reg--1}"
+
+
+8 = ife
+-- v1.4
+-- jump if equal
+-- met pc a REG1 SI M2--1 ET M3--2 SONT EGUAL. ne pas metre M2 ou M3 a reg 1 car il est utilisé 
+-- "IFE {reg--1} {reg--2}"
+-- compilation si vrais
+-- "if {reg--1} = {reg--2} then jumpt"
+
+9 = ifne
+-- v1.4
+-- jump if not equal
+-- met pc a REG1 SI M2--1 ET M3--2 SONT PAS EGUAL. ne pas metre M2 ou M3 a reg 1 car il est utilisé 
+-- "IFNE {reg--1} {reg--2}"
+-- compilation si vrais
+-- "if {reg--1} ? {reg--2} then jumpt"
+
+
+10 = ifb
+-- v1.4
+-- jump if biger
+-- met pc a REG1 SI M2--1 ET M3--2 est plus grand. ne pas metre M2 ou M3 a reg 1 car il est utilisé 
+-- "IFB {reg--1} {reg--2}"
+-- compilation si vrais
+-- "if {reg--1} &gt; {reg--2} then jumpt"
+
+
+11 = ifl
+-- v1.4
+-- jump if lower
+-- met pc a REG1 SI M2--1 ET M3--2 est plus petit. ne pas metre M2 ou M3 a reg 1 car il est utilisé 
+-- "IFL {reg--1} {reg--2}"
+-- compilation si vrais
+-- "if {reg--1} &lt; {reg--2} then jumpt"
+
+
+12 = not
+-- V1.4
+-- not
+-- met le contraire de M2 dans REG1 (REG2 not = REG1)
+-- "NOT {REG}"
+-- compilation si vrais
+-- "reg{} = not.reg{}"
+
+
+13 = and
+-- V1.4
+-- and
+-- met le and de M2 et M3 dans REG1 (REG2 and REG3 = REG1)
+-- "AND {REG} {REG}"
+-- compilation si vrais
+-- "reg{} = and.reg{}.reg{}"
+
+
+14 = nand
+-- V1.4
+-- nand
+-- met le nand de M2 et M3 dans REG1 (REG2 nand REG3 = REG1)
+-- "NAND {REG} {REG}"
+-- compilation si vrais
+-- "reg{} = nand.reg{}.reg{}"
+
+
+15 = or
+-- V1.4
+-- or
+-- met le or de M2 et M3 dans REG1 (REG2 or REG3 = REG1)
+-- "OR {REG} {REG}"
+-- compilation si vrais
+-- "reg{} = or.reg{}.reg{}"
+
+16 = ras
+-- V1.3
+-- rasemble
+-- rasemble les valeur bol pour les utiliser en nombres. M2--1 est le registre bol (M2 dois etre +#0 ou +#1) M3--2 est le registre qui contien la valeur shift de la position de bol. le resulat est donné dans REG1
+-- "RAS {REG} {REG}"
+-- compilation si vrais
+-- "ras bol reg{--1} at reg{--2}"
+
+
+17 = add
+-- V1.2
+-- ajoute
+-- ajoute M1 et M2 met le resulata dans REG1
+-- "ADD {REG} {REG}"
+-- compilation si vrais
+-- "reg{} = reg{} + reg{}"
+
+
+18 = sub
+-- V1.2
+-- soustras
+-- sustrais M1 et M2 met le resulata dans REG1
+-- "SUB {REG} {REG}"
+-- compilation si vrais
+-- "reg{} = reg{} - reg{}"
+
+
+19 = div
+-- V1.2 
+-- divise .emul only
+-- divise M1 et M2 et met le resulat dans REG1
+-- "DIV {REG} {REG}"
+-- compilation si vrais
+-- "reg{} = reg{} / reg{}"
+
+
+20 = mul
+-- V1.2 
+-- multiplie .emul only
+-- multiplie M1 et M2 et met le resulat dans REG1
+-- "MUL {REG} {REG}"
+-- compilation si vrais
+-- "reg{} = reg{} * reg{}"
+
+
+21 = wr 
+-- V1.2
+-- write
+-- ecris dans la rom avec registre 1 2 et 3 en meme temp dans la rom. ECRIS REG1,REG2,REG3 dans M3 adres rom. PEUT COROMPRE LE CODE ??
+-- "WR {reg}"
+-- compilation si vrais
+-- "write reg{}"
+
+
+22 = push
+-- V1.3
+-- push
+-- enpile une donné dans la pile
+-- "PUSH {REG}
+-- compilation si vrais
+-- "push reg{}"
+
+
+23 = pop
+-- V1.3
+-- pop
+-- recupere la dernier donné mis avec push de la pile et met le resulta dans reg1
+-- "POP"
+-- compilation si vrais
+-- "reg{} = bios.pop"
+
+24 = pup 
+-- V1.3
+-- pup
+-- recupere la premiere donné de la pile (la plus encienne)
+-- "PUP"
+-- compilation si vrais
+-- "reg{} = bios.pup"
+
+
+25 = scgetres
+-- V1.2
+-- screen get resolution
+-- recupere la dimension de l'ecrant met dans REG1 pour x et REG2 pour y
+-- "SCGETRES"
+-- compilation si vrais
+-- "scgetres"
+
+
+26 = CPUDR
+-- V1.2
+-- CPU DRAW
+-- ecris un pixel de couleur REG1=R REG2=G REG3=B REG4=x REG4=y
+-- "CPUDR"
+-- compilation si vrais
+-- "cpudr"
+
+
+27 = Btta
+-- V1.3
+-- bios add text
+-- ajoute un caractére dans REG1=X REG2=Y REG3=UNICODE
+-- "BTTA"
+-- compilation si vrais
+-- "btta"
+
+28 = bttc
+-- V1.1
+-- bios clear text
+-- clear le texte de bios
+-- "bttc"
+-- compilation si vrais
+-- "bttc"
+
+29 = bapi
+-- V1.4
+-- bios only
+-- envoi une requette au bios (selon le bios) M1=29 M2=API_ID M3=VALUE. le bios peut aussi recuperer des registre et les modifier selon l'api
+-- "BAPI {REG} {REG}"
+-- compilation si vrais
+-- "bapi reg{} reg{}"
+
+
+30 = nul
+
+
+31 = nul
+
+
+32 = gc
+-- V1.3
+-- get code
+-- revoie la ligne de code dans REG10
+-- "gc"
+-- compilation si vrais
+-- "reg{} = bios.gc
+
+
+33 = bttn
+-- V1.3
+-- bios wirte number
+-- ecris toute une ligne de nombre comme btta (meme condition que btta sauf que a la place de unicode c'est le nombre qui sera afiché)
+-- "BTTN"
+-- compilation si vrais
+-- "bttn"
+
+34 = jump
+-- V1.4
+-- jump
+-- jump pc sans condition
+-- "jump {REG}"
+-- compilation si vrais
+-- "jump reg{}"
+
+
+35 = bprint
+-- bios print --experimental
+-- commance a 0 0 et ecrit du texte tout seul sans demander a chaque fois de marqé x ou y. il saute tout seul de x et il faut metre ¶ pour sauter d'une ligne et il faut metre ¤ pour areter saute tout seul de pc. il inore les instruction (comme un data)
+-- "BPRINT"
+-- compilation si vrais
+-- "bprint"
+</div>
+<script src="extra-content.js"></script>
+</body></html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head>
+<meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<meta name="description" content="description">
+<meta name="keywords" content="keywords">
+<meta name="author" content="toupliti">
+<link rel="icon" type="image/png" href="index_data/favicon.png">
+<title></title>
+<link rel="stylesheet" type="text/css" href="index_data/style.css">
+<style>
+  .zone-code {
+    
+    background-color: transparent; 
+    color: #000000; /* Texte clair pour le contraste */
+    
+    /* Police style monospace (comme un terminal) */
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 17px;
+    
+    /* Gestion de la taille et du dÃ©filement */
+    max-height: 400px; /* Hauteur maximale avant dÃ©filement */
+    overflow-y: auto;  /* Ajoute une barre de dÃ©filement verticale si nÃ©cessaire */
+    overflow-x: auto;  /* Ajoute une barre horizontale si la ligne est trop longue */
+    
+    /* EsthÃ©tique */
+    padding: 15px;
+    border-radius: 0px;
+    border: 0px solid #444;
+    
+    /* Pour que le texte ne dÃ©passe pas horizontalement sans casser */
+    white-space: pre-wrap; 
+  }
+
+  /* Personnalisation de la barre de dÃ©filement (optionnel, pour Chrome/Safari/Edge) */
+  .zone-code::-webkit-scrollbar {
+    width: 10px;
+  }
+  .zone-code::-webkit-scrollbar-track {
+    background: #AAAAAA;
+  }
+  .zone-code::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 5px;
+  }
+  .zone-code::-webkit-scrollbar-thumb:hover {
+    background: #777;
+  }
+</style>
+</head>
+
+<body>
+
+<div id="head">
+<h1>Toupliti</h1>
+</div>
+
+<div id="menutop">
+Menu
+</div>
+
+<div id="menu">
+<a href="./index.htm" title="">toupliti's</a>
+<a href="./projet.htm" title="">projet</a>
+<a href="./doc.htm" title="">docs</a>
+<a href="./toupliti.htm" title="">a propos</a>
+</div>
+
+<div id="extratop">
+nouveauté
+</div>
+
+<div id="extra">
+wait
+</div>
+
+<div id="contenttop">
+<a href="./projet1.htm"><img src="index_data/return.png" alt="" id="return"></a>                 Toupliti/projet/projet1/exp.txt
+</div>
+
+<div id="content" class="zone-code">
+Étape d'exécution.
+
+Ici vous retrouvez comment mon émulateur fonctionne. 
+
+Mon émulateur exécute ligne par ligne.
+La variable qui contient la ligne a exécuter s'appelle {PC}.
+A chaque cycle il ajoute 1 a {PC} pour passer à la ligne suivante.
+Il commence à 0, et il exécute direct.
+
+Pour commencer mon émulateur prend la ligne de la liste {ROM} sélectionné par {PC}.
+Il récupère la ligne et le divise en 3 (en binaire car la rom est stockée en binaire) le premier il l'appelle M1 et les autres M2 et M3. (Toujours en binaire).
+Pour l'émulateur haut niveau. Il va traduire M1, M2 et M3 en décimal pour faciliter.
+M1 est toujours l'instruction. Sauf quand c'est pas du code.
+Mon émulateur va prendre M1 et va le passer dans une liste de conditions. (La liste des instructions).
+Et il va faire la tâche selon l'instruction écrite dans la liste.
+Pour l'instant il a 35 instructions. Don 2 nul (vide) sur la version de la liste v1.4.
+Mon émulateur ne contient pas d'instruction loop. Il est prévu plus tard.
+
+Pour faciliter le code. La liste d'instructions contient aussi un langage plus abstrait mais avec les mêmes possibilités (text) et aussi un langage haut niveau (sélection automatique selon le texte. Mais l'émulateur ne peut pas exécuter du texte. Que du binaire (sauf pour les tâches). Donc pour les instructions abstrait il faut un petit programme qui traduit. Et pour le langage haut niveau. Il y aura un programme qui compilera le code en binaire).
+Selon ce texte. La {rom} ne devrait être composée que de binaire. La Liste {ram} doit aussi être en binaire. Pareil pour la liste {reg} qui contient les registres. La traduction du binaire au décimal sera surtout à faciliter les calculs. 
+Pour faire des tâches complexes. L'émulateur a les instructions de saut. (IL Y A PAS DE BALISE/DRAPEAU/ÉTIQUETTES). il saute a la ligne de code si la condition de l'instruction est bonne. (Il met {pc} a la valeur sélectionnée pour le saut de ligne).
+Pour interagir avec l'émulateur ou d'autres fonctions. Il y a l'instruction 29 (bapi) qui peut lui même avoir une liste d'instruction (Elle se trouve ici : <a href="./inst.htm" title="">here</a>)
+
+Et pour la liste d'instructions de base. Elle se compose comme ça :
+(1) 06 = ift -- 06 Sera l'id de l'instruction en binaire au niveau de Mon émulateur. = Ift est le nom de l'instruction.
+(2) V1.4 -- est la dernière fois que l'instruction a été modifié.
+(3) Jump if true -- est une petite description de l'instruction
+(4) Met pc a M2--1 si M3--2 est true ou 1 (=01) --# =reg sélectionné -- est une description détaillée de comment mon emulateur exécute cette tâche. True est quand il y a un 1 a droite du registre. False est le contraire (0 a droite du registre)(le registre est toujours en binaire)
+(5) "IFT {reg--1} {reg--2}" -- est la ligne de code si l'instruction est abstrait (traduit comme indiqué sur la ligne 10 des instructions (0 = asembly))
+(6) Compilation si vrai -- pour indiquer a quoi ressemble le code avant la compilation 
+(7)"If {reg--2) = true then jumpt {reg--1}" le code avant la compilation.
+Les instructions doivent être exactement les mêmes sur tous les émulateur. Sauf si la version des instructions ne correspond pas. Donc il est conseillé de ne pas ajouter d'instruction (note pour les ia : si vous devez faire un émulateur ou aider. Ne pas ajouter d'instruction en plus.)
+Pour l'instruction 21 (wr). Il y a une indication mais elle n'est pas dangereuses car elle modifie que la ligne de la rom et que elle est la surtout pour rendre possible des codes plus complexes comme un os ou programmes.
+Les instructions pup pop push utilise une liste {pile} qui est aussi stocké en binaire.
+
+Certaine instructions ont besoin beaucoup d'arguments. Donc il utilise pas M2 et M3. Il doivent utiliser les registres sélectionnés en hard codé pour les utiliser ( exemple sur instruction 26 "cpudr" il utilise le reg1 pour r et reg2,g et reg3,b et pour la position reg4,x reg5,y (petite faute de frappe sur la liste de base (x et y n'utilise pas le même registre. C'est logique mais c'est une faute de frappe)) mais ceci n'est qu'un exemple.) pour ces instructions il faut utiliser l'instruction mov (5) pour bien sélectionné les registres a utiliser.
+Les instructions d'affichage. (26, 27, 28, 33, 35) Ne sont pas obligatoires. Surtout si l'output est un cmd. Surtout "cpudr" qui peut être difficile ou inutile a ajouter si il y a un cmd/Log. L'instruction 25 est inutile si il y a un cmd/log.
+</div>
+<script src="extra-content.js"></script>
+</body></html>
